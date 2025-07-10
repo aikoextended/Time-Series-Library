@@ -26,7 +26,8 @@ python -u run.py \
   --des 'Exp' \
   --itr 1 \
   --top_k 5 \
-  --use_gpu False
+  --use_gpu False \
+> "logs/NST_ETTm1_$(date +'%Y%m%d_%H%M%S').log" 2>&1
 
 python -u run.py \
   --task_name long_term_forecast \
@@ -51,7 +52,8 @@ python -u run.py \
   --des 'Exp' \
   --itr 1 \
   --top_k 5 \
-  --use_gpu False
+  --use_gpu False \
+> "logs/NST_ETTm1_$(date +'%Y%m%d_%H%M%S').log" 2>&1
 
 python -u run.py \
   --task_name long_term_forecast \
@@ -76,7 +78,8 @@ python -u run.py \
   --des 'Exp' \
   --itr 1 \
   --top_k 5 \
-  --use_gpu False
+  --use_gpu False \
+> "logs/NST_ETTm1_$(date +'%Y%m%d_%H%M%S').log" 2>&1
 
 python -u run.py \
   --task_name long_term_forecast \
@@ -101,4 +104,5 @@ python -u run.py \
   --des 'Exp' \
   --itr 1 \
   --top_k 5 \
-  --use_gpu False
+  --use_gpu False \
+> "logs/NST_ETTm1_$(date +'%Y%m%d_%H%M%S').log" 2>&1
