@@ -6,9 +6,16 @@ def RSE(pred, true):
 
 
 def CORR(pred, true):
-    u = ((true - true.mean(0)) * (pred - pred.mean(0))).sum(0)
-    d = np.sqrt(((true - true.mean(0)) ** 2 * (pred - pred.mean(0)) ** 2).sum(0))
-    return (u / d).mean(-1)
+    pred = pred.reshape(-1, pred.shape[-1])
+    true = true.reshape(-1, true.shape[-1])
+    pred_mean = pred.mean(axis=0)
+    true_mean = true.mean(axis=0)
+
+    num = np.sum((pred - pred_mean) * (true - true_mean), axis=0)
+    den = np.sqrt(np.sum((pred - pred_mean) ** 2, axis=0) * np.sum((true - true_mean) ** 2, axis=0))
+    corr = num / den
+
+    return np.mean(corr)  # hasil akhir adalah scalar antara -1 dan 1
 
 
 def MAE(pred, true):
@@ -37,5 +44,6 @@ def metric(pred, true):
     rmse = RMSE(pred, true)
     mape = MAPE(pred, true)
     mspe = MSPE(pred, true)
+    corr = CORR(pred, true)
 
-    return mae, mse, rmse, mape, mspe
+    return mae, mse, rmse, mape, mspe, corr

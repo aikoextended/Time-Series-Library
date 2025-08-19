@@ -1,5 +1,4 @@
-# export CUDA_VISIBLE_DEVICES=2  # Hapus atau komentar baris ini
-export CUDA_VISIBLE_DEVICES=-1
+export CUDA_VISIBLE_DEVICES=2
 
 model_name=TimesNet
 
@@ -25,9 +24,8 @@ python -u run.py \
   --d_ff 32 \
   --des 'Exp' \
   --itr 1 \
-  --top_k 5 \
-  --use_gpu False \
-> "logs/NST_ETTm1_$(date +'%Y%m%d_%H%M%S').log" 2>&1
+  --top_k 5 
+
 
 python -u run.py \
   --task_name long_term_forecast \
@@ -51,9 +49,8 @@ python -u run.py \
   --d_ff 32 \
   --des 'Exp' \
   --itr 1 \
-  --top_k 5 \
-  --use_gpu False \
-> "logs/NST_ETTm1_$(date +'%Y%m%d_%H%M%S').log" 2>&1
+  --top_k 5
+
 
 python -u run.py \
   --task_name long_term_forecast \
@@ -77,9 +74,8 @@ python -u run.py \
   --d_ff 32 \
   --des 'Exp' \
   --itr 1 \
-  --top_k 5 \
-  --use_gpu False \
-> "logs/NST_ETTm1_$(date +'%Y%m%d_%H%M%S').log" 2>&1
+  --top_k 5
+
 
 python -u run.py \
   --task_name long_term_forecast \
@@ -103,6 +99,4 @@ python -u run.py \
   --d_ff 32 \
   --des 'Exp' \
   --itr 1 \
-  --top_k 5 \
-  --use_gpu False \
-> "logs/NST_ETTm1_$(date +'%Y%m%d_%H%M%S').log" 2>&1
+  --top_k 5

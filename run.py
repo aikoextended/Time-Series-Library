@@ -35,7 +35,7 @@ if __name__ == '__main__':
                         help='forecasting task, options:[M, S, MS]; M:multivariate predict multivariate, S:univariate predict univariate, MS:multivariate predict univariate')
     parser.add_argument('--target', type=str, default='OT', help='target feature in S or MS task')
     parser.add_argument('--freq', type=str, default='h',
-                        help='freq for time features encoding, options:[s:secondly, t:minutely, h:hourly, d:daily, b:business days, w:weekly, m:monthly], you can also use more detailed freq like 15min or 3h')
+                        help='freq for time features encoding, options:[s:secondly, t:minutely, h:hourly, d:daily, b:business days, w:weekly, m:monthly], you can also use more detailed     like 15min or 3h')
     parser.add_argument('--checkpoints', type=str, default='./checkpoints/', help='location of model checkpoints')
 
     # forecasting task
@@ -98,7 +98,7 @@ if __name__ == '__main__':
     parser.add_argument('--use_amp', action='store_true', help='use automatic mixed precision training', default=False)
 
     # GPU
-    parser.add_argument('--use_gpu', type=bool, default=False, help='use gpu')
+    parser.add_argument('--use_gpu', type=bool, default=True, help='use gpu')
     parser.add_argument('--gpu', type=int, default=0, help='gpu')
     parser.add_argument('--gpu_type', type=str, default='cuda', help='gpu type')  # cuda or mps
     parser.add_argument('--use_multi_gpu', action='store_true', help='use multiple gpus', default=False)
@@ -141,24 +141,15 @@ if __name__ == '__main__':
     parser.add_argument('--patch_len', type=int, default=16, help='patch length')
 
     args = parser.parse_args()
-    # if torch.cuda.is_available() and args.use_gpu:
-    #     args.device = torch.device('cuda:{}'.format(args.gpu))
-    #     print('Using GPU')
-    # else:
-    #     if hasattr(torch.backends, "mps"):
-    #         args.device = torch.device("mps") if torch.backends.mps.is_available() else torch.device("cpu")
-    #     else:
-    #         args.device = torch.device("cpu")
-    #     print('Using cpu or mps')
-    
-    # KODE PERUBAHAN
-    if args.gpu_type == 'cuda':
-        if torch.cuda.is_available() and args.use_gpu:
-            args.device = torch.device('cuda:{}'.format(args.gpu))
-            print('Using GPU')
+    if torch.cuda.is_available() and args.use_gpu:
+        args.device = torch.device('cuda:{}'.format(args.gpu))
+        print('Using GPU')
+    else:
+        if hasattr(torch.backends, "mps"):
+            args.device = torch.device("mps") if torch.backends.mps.is_available() else torch.device("cpu")
         else:
-            args.device = torch.device('cpu')
-            print('Using cpu')                  
+            args.device = torch.device("cpu")
+        print('Using cpu or mps')
 
     if args.use_gpu and args.use_multi_gpu:
         args.devices = args.devices.replace(' ', '')
